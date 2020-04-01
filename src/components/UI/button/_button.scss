@@ -1,0 +1,37 @@
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  width: fit-content;
+  height: 4rem;
+  padding: 0.5rem 2rem;
+  letter-spacing: 0.1rem;
+  border-radius: 0.3rem;
+  font-size: $text-font-size;
+  cursor: pointer;
+
+  border: none;
+  font-family: inherit;
+
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &--primary,
+  &--secondary {
+    color: $white;
+  }
+
+  &--primary {
+    background-color: $yellow;
+  }
+
+  &--secondary {
+    background-color: $dark-blue;
+  }
+}

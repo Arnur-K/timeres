@@ -1,0 +1,96 @@
+.section-user-account {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  &__form {
+    width: 50rem;
+    padding: 2rem;
+    border-radius: 0.3rem;
+    @include box-shadow;
+  }
+
+  &__backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba($black, 0.9);
+    z-index: 2000;
+  }
+
+  &__user-photo-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 2.5rem;
+    border-radius: 0.3rem;
+
+    padding: 2rem;
+    @include box-shadow;
+  }
+
+  &__user-photo-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__user-photo-box img {
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    border-radius: 0.3rem;
+    width: 30rem;
+    height: 30rem;
+  }
+
+  &__user-photo-box i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    font-size: 10rem;
+    color: #ccc;
+  }
+
+  &__form-change-password {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50rem;
+    padding: 2rem;
+    background-color: $white;
+    border-radius: 0.3rem;
+    @include box-shadow;
+    z-index: 3000;
+  }
+
+  &__input-file-wrapper {
+    margin-top: 1rem;
+    font-size: $text-font-size;
+  }
+
+  &__input-file-label {
+  }
+
+  &__input-file-input {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  &__message {
+    font-size: $text-font-size;
+    &--green {
+      color: $green;
+    }
+    &--red {
+      color: $red;
+    }
+  }
+}

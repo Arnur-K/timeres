@@ -1,0 +1,19 @@
+.main {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 80%;
+   min-height: calc(100vh - 6rem);
+   margin: 0 auto;
+
+   animation: fadeIn 1000ms ease forwards;
+}
+
+@keyframes fadeIn {
+   from {
+      opacity: 0;
+   }
+   to {
+      opacity: 1;
+   }
+}
