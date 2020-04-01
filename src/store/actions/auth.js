@@ -13,11 +13,9 @@ export const authSuccess = (token, user) => ({
 
 export const authFail = error => ({ type: AUTH_FAIL, error: error });
 
-export const authSignout = () => {
-   return {
-      type: AUTH_SIGNOUT
-   };
-};
+export const authSignout = () => ({
+   type: AUTH_SIGNOUT
+});
 
 export const checkAuthTimeout = expTime => dispatch => {
    setTimeout(() => {
@@ -25,7 +23,7 @@ export const checkAuthTimeout = expTime => dispatch => {
    }, expTime);
 };
 
-export const auth = (email, password, signUp) => dispatch => {
+export const auth = (email, password, signUp, signOut) => dispatch => {
    dispatch(authStart());
 
    if (signUp) {
@@ -78,6 +76,8 @@ export const authCheckState = () => {
                dispatch(showLoader(false));
                dispatch(authSuccess(token, user));
             });
+         } else {
+            dispatch(showLoader(false));
          }
       });
    };

@@ -185,7 +185,6 @@ input {
   display: block;
   width: 100%;
   padding: 1rem;
-  border: 0.2rem solid rgba(40, 38, 44, 0.3);
   border-radius: 0.3rem;
   background-color: #f9f5ff;
   font-family: inherit;
@@ -206,19 +205,10 @@ input {
   width: 47.5%;
 }
 
-input:focus,
-textarea:focus {
-  border: 0.2rem solid #e3cc3b;
-}
-
 input:disabled,
 textarea:disabled {
   background-color: #e2e2e2;
   border: none;
-}
-
-.invalid {
-  border: 0.2rem solid #ff415a;
 }
 
 .button-container {
