@@ -1,56 +1,86 @@
-import React from "react";
-import NavItem from "./navItem/navItem";
+import React from 'react';
+import { connect } from 'react-redux';
+import NavItem from './navItem/navItem';
 
-export default ({ isAuthenticated }) => {
+const navItems = ({
+  isAuthenticated,
+  content,
+  lang,
+  listItemCn,
+  linkCn,
+  navCn,
+  ulCn,
+  activeCn,
+}) => {
   let nav = null;
+
+  let componentContent = {};
+  if (content.en !== undefined && lang === 'en') {
+    componentContent = {
+      home: content.en.nav.home,
+      myEvents: content.en.nav.myEvents,
+      newEvent: content.en.nav.newEvent,
+    };
+  } else if (content.ru !== undefined && lang === 'ru') {
+    componentContent = {
+      home: content.ru.nav.home,
+      myEvents: content.ru.nav.myEvents,
+      newEvent: content.ru.nav.newEvent,
+    };
+  }
 
   if (isAuthenticated !== null) {
     nav = (
-      <nav className="header__nav">
-        <ul className="header__nav-list">
+      <nav className={navCn}>
+        <ul className={ulCn}>
           <NavItem
             link="/"
             exact
-            listItemCn="header__list-item"
-            linkCn="header__link"
+            listItemCn={listItemCn}
+            linkCn={linkCn}
+            activeCn={activeCn}
           >
-            Home
+            {componentContent.home}
           </NavItem>
           <NavItem
-            link="/new-countdown-timer"
-            listItemCn="header__list-item"
-            linkCn="header__link"
+            link="/new-event"
+            listItemCn={listItemCn}
+            linkCn={linkCn}
+            activeCn={activeCn}
           >
-            New countdown timer
+            {componentContent.newEvent}
           </NavItem>
           <NavItem
-            link="/my-countdown-timers"
-            listItemCn="header__list-item"
-            linkCn="header__link"
+            link="/my-events"
+            listItemCn={listItemCn}
+            linkCn={linkCn}
+            activeCn={activeCn}
           >
-            My countdown timers
+            {componentContent.myEvents}
           </NavItem>
         </ul>
       </nav>
     );
   } else {
     nav = (
-      <nav className="header__nav">
-        <ul className="header__nav-list">
+      <nav className={navCn}>
+        <ul className={ulCn}>
           <NavItem
             link="/"
             exact
-            listItemCn="header__list-item"
-            linkCn="header__link"
+            listItemCn={listItemCn}
+            linkCn={linkCn}
+            activeCn={activeCn}
           >
-            Home
+            {componentContent.home}
           </NavItem>
           <NavItem
-            link="/new-countdown-timer"
-            listItemCn="header__list-item"
-            linkCn="header__link"
+            link="/new-event"
+            listItemCn={listItemCn}
+            linkCn={linkCn}
+            activeCn={activeCn}
           >
-            New countdown timer
+            {componentContent.newEvent}
           </NavItem>
         </ul>
       </nav>
@@ -59,3 +89,10 @@ export default ({ isAuthenticated }) => {
 
   return nav;
 };
+
+const mapStateToProps = (state) => ({
+  content: state.content.content,
+  lang: state.ui.lang,
+});
+
+export default connect(mapStateToProps, null)(navItems);

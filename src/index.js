@@ -1,13 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import "./styles/index.css";
-import * as serviceWorker from "./serviceWorker";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import store from "./store/store";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import store from './store/store';
+import './index.scss';
 
-import { firebaseInitApp } from "./store/firebase/firebase";
+import { firebaseInitApp } from './store/firebase/firebase';
 
 firebaseInitApp();
 
@@ -19,5 +19,5 @@ const app = (
   </Provider>
 );
 
-ReactDOM.render(app, document.getElementById("root"));
+ReactDOM.render(app, document.getElementById('root'));
 serviceWorker.register();

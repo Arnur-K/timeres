@@ -1,0 +1,213 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.chat {
+  width: 100%;
+  height: 100%;
+
+  &__messages {
+    height: calc(100% - 10rem);
+    border-radius: 0.5rem;
+    padding: 1.5rem 2.5rem;
+    margin-bottom: 1.25rem;
+    scroll-behavior: smooth;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: $color-main;
+
+    @include box-shadow-2;
+  }
+
+  &__form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 6rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    @include box-shadow-2;
+  }
+
+  &__input {
+    position: absolute;
+    width: 100%;
+    background-color: $color-main;
+    height: 100%;
+    padding: 1.5rem 2.5rem;
+    border-radius: 0.5rem;
+    border: 0.2rem solid transparent;
+    outline: none;
+    font-family: inherit;
+    font-size: $text-font-size;
+  }
+
+  &__button {
+    margin: 0 1rem 0 auto;
+    z-index: 500;
+    border-radius: 0.5rem;
+    font-size: $text-font-size;
+    padding: 0.75rem 2.5rem;
+    border: none;
+    outline: none;
+    background-color: $color-highlight;
+    color: $color-main;
+    cursor: pointer;
+    height: 70%;
+    width: auto;
+    transition: all 0.2s;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &__button-share {
+    display: block;
+    margin: 0 1rem 1.25rem auto;
+    border-radius: 0.5rem;
+    font-size: $text-font-size;
+    padding: 0.375rem 1.25rem;
+    border: none;
+    outline: none;
+    background-color: $color-stroke;
+    color: $color-main;
+    height: calc(6rem * 0.7);
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &__message-box {
+    width: fit-content;
+    height: auto;
+    display: block;
+    background-color: $color-main;
+    padding: 1rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+
+    @include box-shadow-2;
+
+    &--current-user {
+      background-color: $color-stroke;
+      color: $color-main;
+      margin-left: auto;
+
+      .chat__username {
+        color: $color-tertiary;
+      }
+
+      .chat__time {
+        color: $color-secondary;
+      }
+    }
+  }
+
+  &__username {
+    font-size: 1.4rem;
+    margin-right: 1rem;
+  }
+
+  &__time {
+    font-size: 1.2rem;
+    color: rgba($color-stroke, 0.8);
+  }
+
+  &__message {
+    font-size: $text-font-size;
+    display: block;
+  }
+}
+
+.user-event-popup {
+  width: 40rem;
+  height: auto;
+  background-color: $color-main;
+  position: absolute;
+  bottom: 20rem;
+  left: 5rem;
+
+  @include box-shadow-2;
+
+  @include respond(tab-port) {
+    width: 30rem;
+  }
+
+  border-radius: 0.5rem;
+  padding: 2.5rem;
+
+  &__title {
+    text-align: center;
+    font-size: $h3-font-size;
+    padding: 0.5rem 0;
+  }
+
+  &__event-name-button {
+    margin: 0.5rem 0.5rem 0 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    height: calc(6rem * 0.7);
+    padding: 0.375rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: $text-font-size;
+    background-color: $color-stroke;
+    color: $color-main;
+    transition: all 0.2s;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.fa-plus {
+  margin-right: 0.75rem;
+}
+
+.event {
+  color: $color-stroke;
+  font-size: $text-font-size;
+
+  &__content {
+    display: block;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+
+    background-color: $color-secondary;
+  }
+
+  &__title,
+  &__name,
+  &__date,
+  &__time,
+  &__address,
+  &__description {
+    display: block;
+  }
+
+  &__title {
+    color: $color-stroke;
+    font-size: $h3-font-size;
+
+    &--current-user {
+      color: $color-main;
+    }
+  }
+
+  &__name {
+    text-align: center;
+  }
+
+  &__date,
+  &__time {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+  }
+}

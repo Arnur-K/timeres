@@ -1,0 +1,33 @@
+@import './sass/mixins';
+
+.component,
+.component-user-events,
+.component-new-event {
+  position: absolute;
+  height: calc(100% - 8rem);
+  margin: 8rem auto;
+  width: 100%;
+  @include respond(phone) {
+  }
+}
+
+.component {
+  @include display-flex-center;
+}
+
+.component,
+.component-new-event,
+.component-user-events {
+  @include respond(phone) {
+    width: 90%;
+  }
+}
+
+.component-new-event div:first-child {
+  width: 50rem;
+  @include respond(phone) {
+    width: 100%;
+  }
+  position: relative;
+  margin: 5rem auto 0 auto;
+}

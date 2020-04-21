@@ -1,57 +1,143 @@
-import React from 'react';
-import NavItem from '../navItems/navItem/navItem';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import NavItem from '../navItems/navItem/navItem';
+import { toggleLanguage } from '../../../store/actions/ui';
 
-const navAuth = ({ isAuthenticated, clicked, photoURL }) => {
+const NavAuth = ({
+  isAuthenticated,
+  clicked,
+  photoURL,
+  onToggleLanguage,
+  content,
+  lang,
+  listItemCn,
+  linkSignInCn,
+  linkSignUpCn,
+  navCn,
+  ulCn,
+  buttonRuCn,
+  buttonEnCn,
+  buttonUserCn,
+  listSignUp,
+  listSignIn,
+  activeCn,
+  clicknNone,
+}) => {
   let nav = null;
+  let componentContent = {};
+
+  if (content.en !== undefined && lang === 'en') {
+    componentContent = {
+      signIn: content.en.nav.signIn,
+      signUp: content.en.nav.signUp,
+    };
+  } else if (content.ru !== undefined && lang === 'ru') {
+    componentContent = {
+      signIn: content.ru.nav.signIn,
+      signUp: content.ru.nav.signUp,
+    };
+  }
+
+  const langButtonClick = useCallback((lang) => {
+    onToggleLanguage(lang);
+  }, []);
 
   if (isAuthenticated !== null) {
     nav = (
-      <nav className="header__nav">
-        <button onClick={() => clicked(true)} className="header__user">
-          {photoURL !== null ? (
-            <img src={photoURL} alt="User" />
-          ) : (
-            <i className="fas fa-user-alt"></i>
-          )}
-        </button>
+      <nav className={navCn}>
+        <ul className={ulCn}>
+          <li className={listItemCn}>
+            <button
+              type="button"
+              onClick={() => langButtonClick('ru')}
+              className={buttonRuCn}
+            >
+              RU
+            </button>
+          </li>
+          <li className={listItemCn}>
+            <button
+              type="button"
+              onClick={() => langButtonClick('en')}
+              className={buttonEnCn}
+            >
+              EN
+            </button>
+          </li>
+
+          <li className={listItemCn}>
+            <button
+              type="button"
+              onClick={clicknNone ? null : () => clicked(true)}
+              className={buttonUserCn}
+            >
+              {photoURL !== null && <img src={photoURL} alt="User" />}
+            </button>
+          </li>
+        </ul>
       </nav>
     );
   } else {
     nav = (
-      <nav className="header__nav">
-        <ul className="header__nav-list">
+      <nav className={navCn}>
+        <ul className={ulCn}>
+          <li className={listItemCn}>
+            <button
+              type="button"
+              onClick={() => langButtonClick('ru')}
+              className={buttonRuCn}
+            >
+              RU
+            </button>
+          </li>
+          <li className={listItemCn}>
+            <button
+              type="button"
+              onClick={() => langButtonClick('en')}
+              className={buttonEnCn}
+            >
+              EN
+            </button>
+          </li>
           <NavItem
             link="/sign-in"
-            listItemCn="header__list-item-auth"
-            linkCn="header__link-sign-in"
+            listItemCn={listSignIn}
+            linkCn={linkSignInCn}
+            activeCn={activeCn}
           >
-            Sign in
+            {componentContent.signIn}
           </NavItem>
           <NavItem
             link="/sign-up"
-            listItemCn="header__list-item-auth"
-            linkCn="header__link-sign-up"
+            listItemCn={listSignUp}
+            linkCn={linkSignUpCn}
+            activeCn={activeCn}
           >
-            Sign up
+            {componentContent.signUp}
           </NavItem>
         </ul>
       </nav>
     );
   }
-
   return nav;
 };
 
 const mapStateToProps = (state) => ({
   photoURL: state.auth.user !== null ? state.auth.user.photoURL : null,
+  content: state.content.content,
+  lang: state.ui.lang,
 });
 
-navAuth.propTypes = {
+const mapDispatchToProps = (dispatch) => ({
+  onToggleLanguage: (lang) => dispatch(toggleLanguage(lang)),
+});
+
+NavAuth.propTypes = {
   isAuthenticated: PropTypes.string,
   photoURL: PropTypes.string,
   clicked: PropTypes.func,
+  onToggleLanguage: PropTypes.func,
 };
 
-export default connect(mapStateToProps, null)(navAuth);
+export default connect(mapStateToProps, mapDispatchToProps)(NavAuth);

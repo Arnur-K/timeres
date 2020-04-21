@@ -1,14 +1,137 @@
-import React from "react";
-import Logo from "../logo/logo";
-import NavItems from "../navItems/navItems";
-import NavAuth from "../navAuth/navAuth.js";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
+import { connect } from 'react-redux';
+import transition025 from '../../../shared/animationTransitions';
+import NavItem from '../navItems/navItem/navItem';
+import Logo from '../logo/logo';
+import NavItems from '../navItems/navItems';
+import NavAuth from '../navAuth/navAuth';
+import './navBar.scss';
 
-export default ({ isAuthenticated, clicked }) => (
-  <header className="header">
-    <div className="header__content-wrapper">
-      <Logo />
-      <NavItems isAuthenticated={isAuthenticated} />
-      <NavAuth clicked={clicked} isAuthenticated={isAuthenticated} />
-    </div>
-  </header>
-);
+const NavBar = ({ isAuthenticated, clicked, lang }) => {
+  const [isActive, setIsActive] = useState(false);
+
+  const variants = {
+    open: { opacity: 1, x: 0 },
+    closed: { opacity: 0, x: '100%' },
+  };
+
+  return (
+    <header className="header">
+      <div className="header__desktop-wrapper">
+        <Logo />
+        <NavItems
+          isAuthenticated={isAuthenticated}
+          navCn="header__nav"
+          ulCn="header__nav-list"
+          listItemCn="header__list-item"
+          linkCn="header__link"
+          activeCn="active"
+        />
+        <NavAuth
+          clicked={clicked}
+          isAuthenticated={isAuthenticated}
+          buttonUserCn="header__user"
+          navCn="header__nav"
+          ulCn="header__nav-list"
+          listItemCn="header__list-item-auth"
+          listSignIn="header__list-item-sign-in"
+          linkSignInCn="header__link-sign-in"
+          linkSignUpCn="header__link-sign-up"
+          buttonRuCn="header__button-ru"
+          buttonEnCn="header__button-en"
+        />
+
+        <button
+          type="button"
+          onClick={() => setIsActive(!isActive)}
+          className={
+            isActive
+              ? 'hamburger hamburger--spin is-active'
+              : 'hamburger hamburger--spin'
+          }
+        >
+          <span className="hamburger-box">
+            <span className="hamburger-inner" />
+          </span>
+        </button>
+      </div>
+      <motion.div
+        initial={{
+          opacity: 0,
+          x: '100%',
+        }}
+        animate={isActive ? 'open' : 'closed'}
+        variants={variants}
+        transition={transition025}
+        className="header__mobile-wrapper"
+      >
+        <NavAuth
+          clicked={clicked}
+          isAuthenticated={isAuthenticated}
+          buttonUserCn="header__mobile-user"
+          navCn="header__mobile-nav-auth"
+          ulCn="header__mobile-nav-list-auth"
+          listItemCn="header__mobile-list-item-auth"
+          listSignIn="header__mobile-list-item-sign-in"
+          listSignUp="header__mobile-list-item-sign-up"
+          linkSignInCn="header__mobile-link-sign-in"
+          linkSignUpCn="header__mobile-link-sign-up"
+          buttonRuCn="header__mobile-button-ru"
+          buttonEnCn="header__mobile-button-en"
+          activeCn="active-yellow"
+          clicknNone
+        />
+        <NavItems
+          isAuthenticated={isAuthenticated}
+          navCn="header__mobile-nav"
+          ulCn="header__mobile-nav-list"
+          listItemCn="header__mobile-list-item"
+          linkCn="header__mobile-link"
+          activeCn="active-yellow"
+        />
+
+        {isAuthenticated !== null && (
+          <nav className="header__mobile-bottom-nav">
+            <ul className="header__mobile-bottom-nav-list">
+              <NavItem
+                link="/user-account"
+                listItemCn="header__mobile-bottom-nav-list-item"
+                linkCn="header__mobile-bottom-nav-link"
+                activeCn="active-yellow"
+              >
+                {lang === 'en' ? 'Mange your account' : 'Управление аккаунтом'}
+              </NavItem>
+              <NavItem
+                link="/sign-out"
+                listItemCn="header__mobile-bottom-nav-list-item"
+                linkCn="header__mobile-bottom-nav-link"
+                activeCn="active-yellow"
+              >
+                {lang === 'en' ? 'Sign out' : 'Выйти'}
+              </NavItem>
+            </ul>
+          </nav>
+        )}
+      </motion.div>
+    </header>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  lang: state.ui.lang,
+});
+
+NavBar.defaultProps = {
+  isAuthenticated: null,
+  lang: 'en',
+};
+
+NavBar.propTypes = {
+  isAuthenticated: PropTypes.string,
+  lang: PropTypes.string,
+  clicked: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, null)(NavBar);

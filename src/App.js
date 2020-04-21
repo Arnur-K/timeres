@@ -1,72 +1,256 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Route, Switch, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { authCheckState } from "./store/actions/index";
-import Layout from "./components/hoc/layout/Layout";
-import EventForm from "./containers/eventForm/EventForm";
-import UserCountdownTimers from "./containers/userCountdownTimers/UserCountdowmTimers";
-import Auth from "./containers/auth/Auth";
-import Signout from "./containers/auth/Signout";
-import Home from "./components/home/home";
-import UserAccount from "./containers/userAccount/UserAccount";
-import NotFound from "./components/notFound/notFound";
-import Loader from "./components/UI/loader/loader";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import { connect } from 'react-redux';
+import { authCheckState, getData, getContent } from './store/actions/index';
+// containers
+import Layout from './containers/layout/Layout';
+import EventForm from './containers/eventForm/EventForm';
+import UserEvents from './containers/userEvents/UserEvents';
+import Auth from './containers/auth/Auth';
+import Signout from './containers/auth/signout';
+import UserAccount from './containers/userAccount/UserAccount';
+// components
+import Home from './components/home/home';
+import NotFound from './components/notFound/notFound';
+import './app.scss';
 
 class App extends React.Component {
-   componentDidMount() {
-      this.props.onTryAutoSignUp();
-   }
+  componentDidMount() {
+    const { onTryAutoSignUp, onGetContent } = this.props;
+    onTryAutoSignUp();
+    onGetContent();
+  }
 
-   render() {
-      let content = null;
-      const { isAuthenticated } = this.props;
+  componentDidUpdate() {
+    const { onGetData, userId } = this.props;
+    onGetData(userId);
+  }
 
-      if (isAuthenticated !== null) {
-         content = (
-            <Switch>
-               <Route
-                  path="/new-countdown-timer"
-                  component={() => (
-                     <section>
-                        <EventForm />
-                     </section>
-                  )}
-               />
-               <Route path="/my-countdown-timers" component={UserCountdownTimers} />
-               <Route path="/user-account" component={UserAccount} />
-               <Route path="/sign-out" component={Signout} />
-               <Route path="/" exact component={Home} />
-               <Route path="*" exact component={NotFound} />
-            </Switch>
-         );
-      } else {
-         content = (
-            <Switch>
-               <Route path="/new-countdown-timer" component={EventForm} />
-               <Route path="/sign-in" component={() => <Auth signUp={false} />} />
-               <Route path="/sign-up" component={() => <Auth signUp={true} />} />
-               <Route path="/" exact component={Home} />
-               <Route path="*" exact component={NotFound} />
-            </Switch>
-         );
-      }
+  render() {
+    let content = null;
+    const { isAuthenticated, location } = this.props;
 
-      return <Layout>{content}</Layout>;
-   }
+    const pageVariants = {
+      initial: {
+        opacity: 0,
+        x: '-100vw',
+      },
+      in: {
+        opacity: 1,
+        x: 0,
+      },
+      out: {
+        opacity: 0,
+        x: '100vw',
+      },
+    };
+
+    const pageTransition = {
+      type: 'tween',
+      ease: 'anticipate',
+      duration: 1,
+    };
+
+    if (isAuthenticated !== null) {
+      content = (
+        <AnimatePresence>
+          <Switch location={location} key={location.pathname}>
+            <Route
+              path="/new-event"
+              component={() => (
+                <motion.section
+                  className="component-new-event"
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <EventForm />
+                </motion.section>
+              )}
+            />
+            <Route
+              path="/my-events"
+              component={() => (
+                <motion.div
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                  className="component-user-events"
+                >
+                  <UserEvents />
+                </motion.div>
+              )}
+            />
+            <Route
+              path="/user-account"
+              component={() => (
+                <motion.div
+                  className="component"
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <UserAccount />
+                </motion.div>
+              )}
+            />
+            <Route path="/sign-out" component={Signout} />
+            <Route
+              path="/"
+              exact
+              component={() => (
+                <motion.div
+                  className="component"
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <Home />
+                </motion.div>
+              )}
+            />
+            <Route
+              path="*"
+              exact
+              component={() => (
+                <motion.div
+                  className="component"
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <NotFound />
+                </motion.div>
+              )}
+            />
+          </Switch>
+        </AnimatePresence>
+      );
+    } else {
+      content = (
+        <AnimatePresence>
+          <Switch location={location} key={location.pathname}>
+            <Route
+              path="/new-event"
+              component={() => (
+                <motion.section
+                  className="component-new-event"
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <EventForm />
+                </motion.section>
+              )}
+            />
+            <Route
+              path="/sign-in"
+              component={() => (
+                <motion.div
+                  className="component"
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <Auth signIn />
+                </motion.div>
+              )}
+            />
+            <Route
+              path="/sign-up"
+              component={() => (
+                <motion.div
+                  className="component"
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <Auth signUp />
+                </motion.div>
+              )}
+            />
+            <Route
+              path="/"
+              exact
+              component={() => (
+                <motion.div
+                  className="component"
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <Home />
+                </motion.div>
+              )}
+            />
+            <Route
+              path="*"
+              exact
+              component={() => (
+                <motion.div
+                  className="component"
+                  initial="initial"
+                  animate="in"
+                  exit="out"
+                  variants={pageVariants}
+                  transition={pageTransition}
+                >
+                  <NotFound />
+                </motion.div>
+              )}
+            />
+          </Switch>
+        </AnimatePresence>
+      );
+    }
+
+    return <Layout>{content}</Layout>;
+  }
 }
 
-const mapStateToProps = state => ({
-   isAuthenticated: state.auth.token
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.token,
+  userId: state.auth.user !== null ? state.auth.user.uid : null,
 });
 
-const mapDispatchToProps = dispatch => ({
-   onTryAutoSignUp: () => dispatch(authCheckState())
+const mapDispatchToProps = (dispatch) => ({
+  onGetData: (userId) => dispatch(getData(userId)),
+  onGetContent: () => dispatch(getContent()),
+  onTryAutoSignUp: () => dispatch(authCheckState()),
 });
+
+App.defaultProps = {
+  isAuthenticated: null,
+  userId: null,
+};
 
 App.propTypes = {
-   onTryAutoSignUp: PropTypes.func.isRequired,
-   isAuthenticated: PropTypes.string
+  onTryAutoSignUp: PropTypes.func.isRequired,
+  location: PropTypes.objectOf(PropTypes.string).isRequired,
+  isAuthenticated: PropTypes.string,
+  userId: PropTypes.string,
+  onGetData: PropTypes.func.isRequired,
+  onGetContent: PropTypes.func.isRequired,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

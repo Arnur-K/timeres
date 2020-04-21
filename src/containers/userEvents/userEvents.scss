@@ -1,0 +1,35 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.section-user-events {
+  width: 100%;
+  height: 100%;
+
+  &__events {
+    width: 100%;
+    display: grid;
+    margin: 5rem auto;
+    grid-template-columns: repeat(2, 55rem);
+    grid-template-rows: auto auto;
+
+    @include respond(tab-port) {
+      grid-template-columns: 0.5fr;
+      grid-template-rows: auto;
+    }
+
+    @include respond(phone) {
+      grid-template-columns: 100%;
+      gap: 2.5%;
+    }
+
+    justify-content: center;
+    gap: 5rem;
+  }
+
+  &__title {
+    margin-top: 5rem;
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+}

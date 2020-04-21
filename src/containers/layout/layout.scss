@@ -1,0 +1,74 @@
+@import '../../sass//variables';
+@import '../../sass//mixins';
+
+.main {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.user-popup-wrapper {
+  position: absolute;
+  z-index: 1000;
+}
+
+.chat-wrapper {
+  z-index: 1;
+  bottom: 5%;
+  left: 5%;
+  position: fixed;
+
+  @include box-shadow-3;
+
+  @include respond(tab-port) {
+    width: 90%;
+    height: 70vh;
+  }
+
+  @include respond(phone) {
+    width: 90%;
+    height: 70vh;
+    right: 5%;
+  }
+
+  width: 40%;
+  height: 75vh;
+  background-color: $color-secondary;
+  border-radius: 0.5rem;
+  padding: 2.5rem 2.5rem 7.5rem;
+}
+
+.chat-show-button {
+  z-index: 2;
+  position: fixed;
+  bottom: 2.5%;
+  left: 5%;
+  border: none;
+  outline: none;
+  @include display-flex-center;
+  border-radius: 100%;
+  width: 5rem;
+  height: 5rem;
+  background-color: $color-highlight;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover,
+  &:focus {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  & i {
+    font-size: 2rem;
+    color: $color-main;
+  }
+}

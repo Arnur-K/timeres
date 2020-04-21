@@ -1,26 +1,41 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './button.scss';
 
-const button = props => (
-  <div className="button-container">
+const button = ({ type, clicked, disabled, style, className, children }) =>
+  type === 'button' ? (
     <button
-      type={props.type}
-      onClick={props.clicked}
-      disabled={props.disabled}
-      style={props.style}
-      className={"button " + props.className}
+      type="button"
+      onClick={clicked}
+      disabled={disabled}
+      style={style}
+      className={`button ${className}`}
     >
-      {props.children}
+      {children}
     </button>
-  </div>
-);
+  ) : (
+    <button
+      type="submit"
+      disabled={disabled}
+      style={style}
+      className={`button ${className}`}
+    >
+      {children}
+    </button>
+  );
+
+button.defaultProps = {
+  disabled: false,
+  style: null,
+  clicked: null,
+};
 
 button.propTypes = {
   type: PropTypes.string.isRequired,
   clicked: PropTypes.func,
   disabled: PropTypes.bool,
-  style: PropTypes.object,
-  className: PropTypes.string.isRequired
+  style: PropTypes.objectOf(PropTypes.string),
+  className: PropTypes.string.isRequired,
 };
 
 export default button;

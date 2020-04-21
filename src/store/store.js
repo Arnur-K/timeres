@@ -1,21 +1,22 @@
-import thunk from "redux-thunk";
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-
-import authReducer from "./reducers/auth";
-import userCdtReducer from "./reducers/userCountdownTimers";
-import eventFormReducer from "./reducers/eventForm";
-import uiReducer from "./reducers/ui";
+import thunk from 'redux-thunk';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import authReducer from './reducers/auth';
+import userEventsReducer from './reducers/userEvents';
+import eventFormReducer from './reducers/eventForm';
+import uiReducer from './reducers/ui';
+import contentReducer from './reducers/content';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  userCdt: userCdtReducer,
+  userEvents: userEventsReducer,
   eventData: eventFormReducer,
-  ui: uiReducer
+  ui: uiReducer,
+  content: contentReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk)),
 );

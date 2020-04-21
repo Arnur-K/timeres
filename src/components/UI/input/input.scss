@@ -1,0 +1,66 @@
+@import '../../../sass/variables';
+@import '../../../sass//mixins.scss';
+
+.input-field {
+  font-size: $text-font-size;
+  margin-bottom: 1rem;
+
+  &__label {
+    display: inline-block;
+    margin: 0 0 0.5rem 2.5rem;
+  }
+
+  &__text,
+  &__date,
+  &__time {
+    display: block;
+    width: 100%;
+    padding: 1.5rem 2.5rem;
+    border: 0.15rem solid rgba($color-stroke, 0.5);
+    outline: none;
+    background: $color-main;
+    border-radius: 0.5rem;
+    font-size: $text-font-size;
+    font-family: inherit;
+  }
+
+  &--text {
+    width: 100%;
+  }
+  &--left {
+    float: left;
+    width: 47.5%;
+    @include respond(phone) {
+      float: none;
+      width: 100%;
+    }
+  }
+  &--right {
+    float: right;
+    width: 47.5%;
+    @include respond(phone) {
+      float: none;
+      width: 100%;
+    }
+  }
+}
+
+input:focus,
+textarea:focus {
+  border: 0.15rem solid $color-highlight;
+}
+
+textarea {
+  resize: none;
+  overflow: hidden;
+}
+
+input:disabled,
+textarea:disabled {
+  background-color: $color-main;
+  border: 0.15rem solid rgba($color-stroke, 0.5);
+}
+
+.invalid {
+  border: 0.15rem solid $color-tertiary;
+}

@@ -1,0 +1,49 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.section-home {
+  min-height: 100%;
+  width: 100%;
+  margin: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__text-box {
+    @include respond(tab-port) {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    text-align: center;
+    color: $color-headline;
+  }
+
+  &__span-1,
+  &__span-2 {
+    display: inline-block;
+  }
+
+  &__span-1 {
+    font-size: 3.6rem;
+    @include respond(tab-port) {
+      display: block;
+    }
+  }
+
+  &__span-2 {
+    font-size: 3rem;
+    color: $color-stroke;
+    font-weight: 300;
+  }
+
+  &__img {
+    @include respond(tab-port) {
+      display: none;
+    }
+    display: block;
+    height: auto;
+    margin-right: 0;
+  }
+}

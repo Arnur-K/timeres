@@ -1,0 +1,39 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.button {
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 1.5rem 2.5rem;
+  line-height: 1;
+  border-radius: 0.5rem;
+
+  color: $color-main;
+  font-size: $text-font-size;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  font-family: inherit;
+
+  transition: all 0.2s;
+
+  &--primary {
+    background-color: $color-highlight;
+  }
+
+  &--secondary {
+    background-color: $color-stroke;
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

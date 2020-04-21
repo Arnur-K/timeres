@@ -1,0 +1,112 @@
+@import '../../sass//variables';
+@import '../../sass//mixins';
+
+.event-item {
+  width: 100%;
+  padding: 4rem;
+  border-radius: 0.5rem;
+  font-size: $text-font-size;
+  margin: 0 0 0 auto;
+  background-color: $color-stroke;
+
+  @include box-shadow-3;
+
+  &:nth-child(even) {
+    margin: 0 auto 0 0;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: $color-main;
+  }
+
+  &__subtitle {
+    color: rgba($color-stroke, 0.8);
+    text-align: center;
+    color: $color-secondary;
+  }
+
+  &__units-wrapper {
+    display: flex;
+    align-items: center;
+
+    @include box-shadow-3;
+
+    @include respond(phone) {
+      flex-direction: column;
+    }
+
+    width: 100%;
+    margin: 2rem auto;
+    border-radius: 0.5rem;
+    background-color: $color-secondary;
+  }
+
+  &__unit-item:first-child {
+    @include respond(phone) {
+      margin-top: 2.5rem;
+    }
+  }
+
+  &__unit-item:last-child {
+    @include respond(phone) {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  &__unit-item {
+    color: $color-tertiary;
+    font-size: 2.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1rem;
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+
+    @include respond(phone) {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+
+  &__unit-label {
+    font-size: $text-font-size;
+    color: $color-stroke;
+  }
+
+  &__address,
+  &__description {
+    margin-bottom: 1rem;
+  }
+
+  &__datetime span,
+  &__address span,
+  &__description span {
+    color: $color-main;
+  }
+
+  &__datetime,
+  &__address {
+    color: $color-secondary;
+  }
+
+  &__datetime {
+    text-align: center;
+    margin-bottom: 1rem;
+
+    @include respond(phone) {
+      text-align: left;
+    }
+  }
+
+  &__datetime span {
+    @include respond(phone) {
+      display: block;
+      margin-bottom: 1rem;
+    }
+  }
+}

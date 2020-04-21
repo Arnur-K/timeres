@@ -1,0 +1,267 @@
+@import '../../../sass//variables';
+@import '../../../sass//mixins';
+@import '../../../sass/hamburgers/_sass/hamburgers/hamburgers.scss';
+
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2;
+  height: 8rem;
+  margin: 0 auto;
+  font-size: $text-font-size;
+  font-weight: 500;
+  background-color: $color-main;
+
+  @include box-shadow-2;
+
+  &__desktop-wrapper {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo-text {
+    box-sizing: border-box;
+    font-size: 3rem;
+    color: $color-stroke;
+    cursor: pointer;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    @include respond(tab-port) {
+      display: none;
+    }
+  }
+
+  &__nav-list {
+    display: flex;
+    align-items: center;
+  }
+
+  &__list-item:not(:last-child) {
+    margin-right: 4rem;
+  }
+
+  &__list-item-auth:nth-child(1) {
+    margin-right: 1rem;
+  }
+
+  &__list-item-auth:nth-child(2) {
+    margin-right: 4rem;
+  }
+
+  &__list-item-sign-in {
+    margin-right: 2rem;
+  }
+
+  &__link {
+    color: rgba($color-stroke, 0.8);
+    transition: color 0.2s;
+
+    &:hover {
+      color: $color-highlight;
+    }
+  }
+
+  &__link-sign-in {
+    color: $color-stroke;
+    transition: all 0.2s;
+    &:hover {
+      opacity: 0.9;
+    }
+    &:active {
+      opacity: 1;
+    }
+  }
+
+  &__link-sign-in,
+  &__link-sign-up,
+  &__link-sign-out {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    transition: opacity 0.2s;
+  }
+
+  &__link-sign-up,
+  &__link-sign-out {
+    background-color: $color-highlight;
+    color: $color-main;
+    &:hover {
+      opacity: 0.9;
+    }
+    &:active {
+      opacity: 1;
+    }
+  }
+
+  &__user {
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: $color-main;
+    &:hover i {
+      color: $color-highlight;
+    }
+  }
+
+  &__user i {
+    display: block;
+    font-size: 2.5rem;
+    color: $color-secondary;
+    transition: color 0.2s;
+  }
+
+  &__user img {
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+  }
+
+  &__button-ru,
+  &__button-en {
+    color: rgba($color-stroke, 0.8);
+    cursor: pointer;
+    font-size: $text-font-size;
+    transition: 0.2s color;
+
+    &:hover {
+      color: $color-highlight;
+    }
+  }
+
+  &__mobile-wrapper {
+    position: fixed;
+    right: 0;
+    background-color: $color-stroke;
+    height: 100vh;
+    width: 30rem;
+    z-index: 1;
+  }
+
+  &__mobile-nav-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__mobile-list-item {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  &__mobile-link {
+    color: $color-main;
+    font-size: $h2-font-size;
+  }
+
+  &__mobile-nav-list-auth {
+    text-align: center;
+  }
+
+  &__mobile-list-item-auth:not(:last-child) {
+    margin: 5rem 0;
+  }
+
+  &__mobile-list-item-auth:last-child {
+    margin-bottom: 5rem;
+  }
+
+  &__mobile-list-item-auth:nth-child(1),
+  &__mobile-list-item-auth:nth-child(2) {
+    display: inline-block;
+  }
+
+  &__mobile-list-item-auth:nth-child(1) {
+    margin-right: 2.5rem;
+  }
+
+  &__mobile-user {
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: $color-main;
+
+    &:hover i {
+      color: $color-highlight;
+    }
+  }
+
+  &__mobile-user i {
+    display: block;
+    font-size: 2.5rem;
+    color: $color-secondary;
+    transition: color 0.2s;
+  }
+
+  &__mobile-user img {
+    display: block;
+    object-fit: cover;
+    border-radius: 50%;
+    width: 12rem;
+    height: 12rem;
+  }
+
+  &__mobile-button-ru,
+  &__mobile-button-en {
+    color: $color-main;
+  }
+
+  &__mobile-list-item-sign-in {
+    margin: 0 0 2.5rem 0;
+  }
+
+  &__mobile-list-item-sign-up {
+    margin: 2.5rem 0 5rem 0;
+  }
+
+  &__mobile-link-sign-in,
+  &__mobile-link-sign-up {
+    font-size: $h2-font-size;
+    color: $color-main;
+  }
+
+  &__mobile-bottom-nav {
+    margin-top: 2.5rem;
+  }
+
+  &__mobile-bottom-nav-list {
+    text-align: center;
+  }
+
+  &__mobile-bottom-nav-list-item {
+    margin-bottom: 2.5rem;
+  }
+
+  &__mobile-bottom-nav-link {
+    color: $color-main;
+    font-size: $h2-font-size;
+  }
+}
+
+.active {
+  color: $color-highlight;
+}
+
+.active-yellow {
+  color: $color-main;
+}
+
+.hamburger {
+  display: none;
+  @include respond(tab-port) {
+    display: block;
+  }
+}
+
+.fa-user-alt {
+}

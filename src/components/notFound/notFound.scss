@@ -1,0 +1,36 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.section-not-found {
+  text-align: center;
+
+  &__title {
+    font-size: 2rem;
+  }
+  &__subtitle {
+    display: block;
+    font-weight: normal;
+  }
+  &__email {
+    font-weight: bold;
+  }
+
+  &__link {
+    display: inline-block;
+    font-size: $text-font-size;
+    margin-top: 2rem;
+    background-color: $color-highlight;
+    color: $color-main;
+    padding: 1.5rem 2.5rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      opacity: 1;
+    }
+  }
+}

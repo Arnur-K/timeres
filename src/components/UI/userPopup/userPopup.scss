@@ -1,0 +1,84 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.user-popup {
+  font-size: $text-font-size;
+  padding: 4rem;
+  background-color: $color-secondary;
+  border-radius: 0.5rem;
+
+  @include box-shadow-3;
+
+  &__user-icon {
+    text-align: center;
+    display: block !important;
+    margin-bottom: 2rem;
+    font-size: 3.5rem;
+    color: $color-main;
+  }
+
+  &__user-photo {
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+  }
+
+  &__text-box {
+    text-align: center;
+  }
+
+  &__name {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  &__email {
+    color: rgba($color-stroke, 0.8);
+  }
+
+  &__nav {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  &__link {
+    background-color: $color-stroke;
+    color: $color-main;
+    width: fit-content;
+
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.9;
+    }
+    &:active {
+      opacity: 1;
+    }
+  }
+
+  &__list--sign-out {
+    margin-top: 5rem;
+  }
+
+  &__link--sign-out {
+    color: $color-main;
+    width: fit-content;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    background-color: $color-highlight;
+    color: $color-main;
+    transition: all 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      opacity: 1;
+    }
+  }
+}
