@@ -49,10 +49,11 @@
   border: none;
   outline: none;
   @include display-flex-center;
-  border-radius: 100%;
+  border-radius: 0.5rem;
   width: 5rem;
+  color: $color-main;
   height: 5rem;
-  background-color: $color-highlight;
+  background-color: $color-tertiary;
   cursor: pointer;
   transition: all 0.2s;
 

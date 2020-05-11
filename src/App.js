@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { connect } from 'react-redux';
-import { authCheckState, getData, getContent } from './store/actions/index';
+import { authCheckState, getData } from './store/actions/index';
 // containers
 import Layout from './containers/layout/Layout';
 import EventForm from './containers/eventForm/EventForm';
@@ -18,9 +18,8 @@ import './app.scss';
 
 class App extends React.Component {
   componentDidMount() {
-    const { onTryAutoSignUp, onGetContent } = this.props;
+    const { onTryAutoSignUp } = this.props;
     onTryAutoSignUp();
-    onGetContent();
   }
 
   componentDidUpdate() {
@@ -235,7 +234,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onGetData: (userId) => dispatch(getData(userId)),
-  onGetContent: () => dispatch(getContent()),
   onTryAutoSignUp: () => dispatch(authCheckState()),
 });
 
@@ -250,7 +248,6 @@ App.propTypes = {
   isAuthenticated: PropTypes.string,
   userId: PropTypes.string,
   onGetData: PropTypes.func.isRequired,
-  onGetContent: PropTypes.func.isRequired,
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

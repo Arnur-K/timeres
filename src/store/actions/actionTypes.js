@@ -6,5 +6,4 @@ export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_SIGNOUT = 'AUTH_SIGNOUT';
 export const TOGGLE_USER_MODAL = 'TOGGLE_USER_MODAL';
 export const SHOW_LOADER = 'SHOW_LOADER';
-export const SET_CONTENT = 'SET_CONTENT';
 export const TOGGLE_LANGUAGE = 'TOGGLE_LANGUAGE';

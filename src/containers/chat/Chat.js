@@ -100,9 +100,10 @@ class Chat extends React.Component {
 
   render() {
     let eventNames = null;
-    const { events, lang, content } = this.props;
+    const { events } = this.props;
+    const { chats, user, message, isShareButtonClicked } = this.state;
 
-    if (events !== undefined && events !== null) {
+    if (events) {
       eventNames = Object.values(events).map((event) => (
         <button
           key={event.id}
@@ -116,46 +117,22 @@ class Chat extends React.Component {
       ));
     }
 
-    let componentContent = null;
-
-    if (lang === 'en' && content.en !== undefined) {
-      componentContent = {
-        inputPlaceholder: content.en.chat.inputPlaceholder,
-        buttonSend: content.en.chat.buttonSend,
-        buttonShare: content.en.chat.buttonShare,
-        popupTitle: content.en.chat.popupTitle,
-        notPopupTitle: content.en.chat.notPopupTitle,
-        eventMessage: content.en.chat.eventMessage,
-      };
-    } else {
-      componentContent = {
-        inputPlaceholder: content.ru.chat.inputPlaceholder,
-        buttonSend: content.ru.chat.buttonSend,
-        buttonShare: content.ru.chat.buttonShare,
-        popupTitle: content.ru.chat.popupTitle,
-        notPopupTitle: content.ru.chat.notPopupTitle,
-        eventMessage: content.ru.chat.eventMessage,
-      };
-    }
-
     return (
       <>
         <div className="chat">
           <div ref={this.chatAreaRef} className="chat__messages">
-            {this.state.chats.map((chat) => {
+            {chats.map((chat) => {
               return (
                 <p
                   key={chat.timestamp}
                   className={
-                    this.state.user.uid === chat.uid
+                    user.uid === chat.uid
                       ? 'chat__message-box chat__message-box--current-user'
                       : 'chat__message-box'
                   }
                 >
                   <span className="chat__username">
-                    {chat.username !== undefined
-                      ? `${chat.username},`
-                      : `${chat.email},`}
+                    {chat.username ? `${chat.username},` : `${chat.email},`}
                   </span>
                   <span className="chat__time">
                     {moment(chat.timestamp).format('HH:m')}
@@ -166,12 +143,12 @@ class Chat extends React.Component {
                     <span className="event">
                       <span
                         className={
-                          this.state.user.uid === chat.uid
+                          user.uid === chat.uid
                             ? 'event__title event__title--current-user'
                             : 'event__title'
                         }
                       >
-                        {componentContent.eventMessage}
+                        Have a look at this event!
                       </span>
                       <span className="event__content">
                         <span className="event__name">{chat.event.name}</span>
@@ -195,24 +172,24 @@ class Chat extends React.Component {
             className="chat__button-share"
             onClick={this.shareButtonClickHandler}
           >
-            {componentContent.buttonShare}
+            Share
           </button>
           <form onSubmit={this.messageSubmitHandler} className="chat__form">
             <input
               onChange={this.messageChangeHandler}
               onKeyDown={this.inputKeyDownHandler}
-              value={this.state.message}
-              placeholder={componentContent.inputPlaceholder}
+              value={message}
+              placeholder="Type here..."
               className="chat__input"
             />
             <button type="submit" className="chat__button">
-              {componentContent.buttonSend}
+              Send
             </button>
           </form>
         </div>
 
         <AnimatePresence>
-          {this.state.isShareButtonClicked ? (
+          {isShareButtonClicked ? (
             <motion.div
               className="user-event-popup"
               transition={transition025}
@@ -230,9 +207,9 @@ class Chat extends React.Component {
               }}
             >
               <h3 className="user-event-popup__title">
-                {this.props.events !== null
-                  ? componentContent.popupTitle
-                  : componentContent.notPopupTitle}
+                {events !== null
+                  ? 'Click on the event to share it'
+                  : "You don't have any events"}
               </h3>
               {eventNames}
             </motion.div>
@@ -247,8 +224,6 @@ const mapStateToProps = (state) => ({
   user: state.auth.user,
   events: state.userEvents.events,
   userId: state.auth.user !== null ? state.auth.user.uid : null,
-  lang: state.ui.lang,
-  content: state.content.content,
 });
 
 export default connect(mapStateToProps, null)(Chat);

@@ -80,11 +80,7 @@ const Event = React.memo(
         if (countdown < 0) {
           clearInterval(timer);
           database().ref(`/users/${userId}/events/${eventId}`).remove();
-          alert(
-            `${eventName}${
-              lang === 'en' ? ' event has started! 🥳' : ' событие началось! 🥳'
-            }`,
-          );
+          alert(`${eventName}${' has started! 🥳'}`);
           document.getElementById(eventId).style.display = 'none';
         }
       }, 1000);
@@ -95,54 +91,20 @@ const Event = React.memo(
 
     const { days, hours, minutes, seconds } = countdownUnits;
 
-    let content = {};
-
-    if (lang === 'en') {
-      content = {
-        startsIn: 'Starts in',
-        days: 'days',
-        hours: 'hours',
-        minutes: 'minutes',
-        seconds: 'seconds',
-        date: 'Date: ',
-        time: 'Time: ',
-        address: 'Address:',
-        description: 'Description:',
-      };
-    } else {
-      content = {
-        startsIn: 'Начнется через',
-        days: 'дней',
-        hours: 'часов',
-        minutes: 'минут',
-        seconds: 'секунд',
-        date: 'Дата: ',
-        time: 'Время: ',
-        address: 'Адрес:',
-        description: 'Описание:',
-      };
-    }
-
     const event = (
       <>
         <div id={eventId} className="event-item">
           <h2 className="event-item__title">{eventName}</h2>
-          <p className="event-item__subtitle">{content.startsIn}</p>
+          <p className="event-item__subtitle">Starts in</p>
           <div className="event-item__units-wrapper">
-            <UnitItem timerUnitNumber={days} timerUnitLabel={content.days} />
-            <UnitItem timerUnitNumber={hours} timerUnitLabel={content.hours} />
-            <UnitItem
-              timerUnitNumber={minutes}
-              timerUnitLabel={content.minutes}
-            />
-            <UnitItem
-              timerUnitNumber={seconds}
-              timerUnitLabel={content.seconds}
-            />
+            <UnitItem timerUnitNumber={days} timerUnitLabel="days" />
+            <UnitItem timerUnitNumber={hours} timerUnitLabel="hours" />
+            <UnitItem timerUnitNumber={minutes} timerUnitLabel="minutes" />
+            <UnitItem timerUnitNumber={seconds} timerUnitLabel="seconds" />
           </div>
 
           <p className="event-item__datetime">
-            {content.date}
+            Date
             <span
               style={{
                 marginRight: '4rem',
@@ -150,11 +112,11 @@ const Event = React.memo(
             >
               {eventDate}
             </span>
-            {content.time} <span>{eventTime}</span>
+            Time <span>{eventTime}</span>
           </p>
           {eventAddress && (
             <>
-              <p>{content.address}</p>
+              <p>Address</p>
               <p className="event-item__address">
                 <span>{eventAddress}</span>
               </p>
@@ -168,7 +130,7 @@ const Event = React.memo(
                   color: '#d1d1e9',
                 }}
               >
-                {content.description}
+                Description
               </p>
               <p className="event-item__description">
                 <span>{eventDescription}</span>
@@ -183,12 +145,6 @@ const Event = React.memo(
   },
 );
 
-Event.defaultProps = {
-  eventAddress: '',
-  eventDescription: '',
-  lang: 'en',
-};
-
 Event.propTypes = {
   userId: PropTypes.string.isRequired,
   eventId: PropTypes.number.isRequired,
@@ -196,9 +152,6 @@ Event.propTypes = {
   eventDate: PropTypes.string.isRequired,
   eventTime: PropTypes.string.isRequired,
   eventDateTimeInMs: PropTypes.number.isRequired,
-  eventAddress: PropTypes.string,
-  eventDescription: PropTypes.string,
-  lang: PropTypes.string,
 };
 
 export default Event;

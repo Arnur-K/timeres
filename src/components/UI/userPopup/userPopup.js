@@ -22,9 +22,7 @@ const userPopup = ({ photoURL, displayName, email, content, lang }) => {
           listItemCn="user-popup__list"
           linkCn="user-popup__link"
         >
-          {lang === 'en' && content.en !== undefined && content !== null
-            ? content.en.userPopup.link1
-            : content.ru.userPopup.link1}
+          Manage you account
         </NavItem>
         <NavItem
           link="/sign-out"
@@ -32,9 +30,7 @@ const userPopup = ({ photoURL, displayName, email, content, lang }) => {
           linkCn="user-popup__link--sign-out"
           listCn
         >
-          {lang === 'en' && content.en !== undefined && content !== null
-            ? content.en.userPopup.link2
-            : content.ru.userPopup.link2}
+          Sign out
         </NavItem>
       </nav>
     </div>
@@ -42,27 +38,21 @@ const userPopup = ({ photoURL, displayName, email, content, lang }) => {
 };
 
 const mapStateToProps = (state) => ({
-  photoURL: state.auth.user !== null ? state.auth.user.photoURL : null,
-  displayName: state.auth.user !== null ? state.auth.user.displayName : null,
-  email: state.auth.user !== null ? state.auth.user.email : null,
-  lang: state.ui.lang,
-  content: state.content.content,
+  photoURL: state.auth.user && state.auth.user.photoURL,
+  displayName: state.auth.user && state.auth.user.displayName,
+  email: state.auth.user && state.auth.user.email,
 });
 
 userPopup.defaultProps = {
   displayName: '',
   email: '',
   photoURL: '',
-  lang: 'en',
-  content: null,
 };
 
 userPopup.propTypes = {
   displayName: PropTypes.string,
   email: PropTypes.string,
   photoURL: PropTypes.string,
-  lang: PropTypes.string,
-  content: PropTypes.objectOf(PropTypes.any),
 };
 
 export default connect(mapStateToProps, null)(userPopup);

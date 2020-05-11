@@ -22,19 +22,9 @@ class Layout extends React.Component {
   }
 
   chatButtonClickHandler = () => {
-    this.setState(
-      (prevState) => ({
-        isChatButtonClicked: !prevState.isChatButtonClicked,
-      }),
-      () => {
-        const chatButtonIcon = this.chatButtonIconRef.current;
-        const { isChatButtonClicked } = this.state;
-        setTimeout(() => {
-          if (isChatButtonClicked) chatButtonIcon.className = 'fas fa-times';
-          else chatButtonIcon.className = 'fas fa-comment-alt';
-        }, 250);
-      },
-    );
+    this.setState((prevState) => ({
+      isChatButtonClicked: !prevState.isChatButtonClicked,
+    }));
   };
 
   render() {
@@ -48,15 +38,6 @@ class Layout extends React.Component {
     } = this.props;
 
     const { isChatButtonClicked } = this.state;
-
-    const variants = {
-      open: {
-        rotate: '360deg',
-      },
-      closed: {
-        rotate: '0deg',
-      },
-    };
 
     if (showLoader) return <Loader />;
 
@@ -101,13 +82,7 @@ class Layout extends React.Component {
                 onClick={this.chatButtonClickHandler}
                 className="chat-show-button"
               >
-                <motion.i
-                  animate={isChatButtonClicked ? 'open' : 'closed'}
-                  variants={variants}
-                  transition={transition025}
-                  ref={this.chatButtonIconRef}
-                  className="fas fa-comment-alt"
-                />
+                Chat
               </button>
               <AnimatePresence>
                 {isChatButtonClicked && (

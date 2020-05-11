@@ -1,11 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import NavItem from './navItem/navItem';
 
 const navItems = ({
   isAuthenticated,
-  content,
-  lang,
   listItemCn,
   linkCn,
   navCn,
@@ -13,21 +10,6 @@ const navItems = ({
   activeCn,
 }) => {
   let nav = null;
-
-  let componentContent = {};
-  if (content.en !== undefined && lang === 'en') {
-    componentContent = {
-      home: content.en.nav.home,
-      myEvents: content.en.nav.myEvents,
-      newEvent: content.en.nav.newEvent,
-    };
-  } else if (content.ru !== undefined && lang === 'ru') {
-    componentContent = {
-      home: content.ru.nav.home,
-      myEvents: content.ru.nav.myEvents,
-      newEvent: content.ru.nav.newEvent,
-    };
-  }
 
   if (isAuthenticated !== null) {
     nav = (
@@ -40,7 +22,7 @@ const navItems = ({
             linkCn={linkCn}
             activeCn={activeCn}
           >
-            {componentContent.home}
+            Home
           </NavItem>
           <NavItem
             link="/new-event"
@@ -48,7 +30,7 @@ const navItems = ({
             linkCn={linkCn}
             activeCn={activeCn}
           >
-            {componentContent.newEvent}
+            New event
           </NavItem>
           <NavItem
             link="/my-events"
@@ -56,7 +38,7 @@ const navItems = ({
             linkCn={linkCn}
             activeCn={activeCn}
           >
-            {componentContent.myEvents}
+            My events
           </NavItem>
         </ul>
       </nav>
@@ -72,7 +54,7 @@ const navItems = ({
             linkCn={linkCn}
             activeCn={activeCn}
           >
-            {componentContent.home}
+            Home
           </NavItem>
           <NavItem
             link="/new-event"
@@ -80,7 +62,7 @@ const navItems = ({
             linkCn={linkCn}
             activeCn={activeCn}
           >
-            {componentContent.newEvent}
+            New event
           </NavItem>
         </ul>
       </nav>
@@ -90,9 +72,4 @@ const navItems = ({
   return nav;
 };
 
-const mapStateToProps = (state) => ({
-  content: state.content.content,
-  lang: state.ui.lang,
-});
-
-export default connect(mapStateToProps, null)(navItems);
+export default navItems;
