@@ -3,7 +3,6 @@ import { updateObject } from '../../shared/utility';
 
 const initialState = {
   showUserModal: false,
-  lang: 'en',
 };
 
 export default (state = initialState, action) => {
@@ -13,7 +12,7 @@ export default (state = initialState, action) => {
         ? updateObject(state, { showUserModal: !state.showUserModal })
         : updateObject(state, { showUserModal: false });
     case TOGGLE_LANGUAGE:
-      return updateObject(state, { lang: action.lang });
+      return updateObject(state);
     default:
       return state;
   }

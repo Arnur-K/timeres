@@ -46,7 +46,6 @@ const Event = React.memo(
     eventDateTimeInMs,
     eventAddress,
     eventDescription,
-    lang,
   }) => {
     const [countdownUnits, dispatch] = useReducer(unitsReducer, []);
 
@@ -104,7 +103,7 @@ const Event = React.memo(
           </div>
 
           <p className="event-item__datetime">
-            Date
+            Date:{' '}
             <span
               style={{
                 marginRight: '4rem',
@@ -112,11 +111,11 @@ const Event = React.memo(
             >
               {eventDate}
             </span>
-            Time <span>{eventTime}</span>
+            Time: <span>{eventTime}</span>
           </p>
           {eventAddress && (
             <>
-              <p>Address</p>
+              <p>Address:</p>
               <p className="event-item__address">
                 <span>{eventAddress}</span>
               </p>
@@ -130,7 +129,7 @@ const Event = React.memo(
                   color: '#d1d1e9',
                 }}
               >
-                Description
+                Description:
               </p>
               <p className="event-item__description">
                 <span>{eventDescription}</span>
@@ -145,6 +144,11 @@ const Event = React.memo(
   },
 );
 
+Event.defaultProps = {
+  eventAddress: null,
+  eventDescription: null,
+};
+
 Event.propTypes = {
   userId: PropTypes.string.isRequired,
   eventId: PropTypes.number.isRequired,
@@ -152,6 +156,8 @@ Event.propTypes = {
   eventDate: PropTypes.string.isRequired,
   eventTime: PropTypes.string.isRequired,
   eventDateTimeInMs: PropTypes.number.isRequired,
+  eventAddress: PropTypes.string,
+  eventDescription: PropTypes.string,
 };
 
 export default Event;

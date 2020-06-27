@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -219,6 +220,14 @@ class Chat extends React.Component {
     );
   }
 }
+
+Chat.defaultProps = {
+  events: null,
+};
+
+Chat.propTypes = {
+  events: PropTypes.objectOf(PropTypes.any),
+};
 
 const mapStateToProps = (state) => ({
   user: state.auth.user,

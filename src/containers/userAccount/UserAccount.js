@@ -134,10 +134,10 @@ class UserAccount extends React.Component {
 
     const updatedControls = updateObject(controls, {
       username: updateObject(controls.username, {
-        value: displayName && displayName,
+        value: displayName,
       }),
       email: updateObject(controls.email, {
-        value: email && email,
+        value: email,
       }),
     });
 
@@ -560,8 +560,8 @@ class UserAccount extends React.Component {
             {userSelectedPhotoSrc !== '' ? (
               <img src={userSelectedPhotoSrc} alt="User" />
             ) : (
-              <i className="fas fa-user-alt" />
-            )}
+                <i className="fas fa-user-alt" />
+              )}
           </div>
           <div className="section-user-account__input-file-wrapper">
             <label htmlFor="file">Upload image</label>

@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 
 const config = {
-  apiKey: 'AIzaSyA9m-M4WJ7OWw9oUtHjz88hkkuNdGLCRMQ',
+  apiKey: 'AIzaSyDREMzFQY0RT-DQ0Zo5prW7RADWdsRTPds',
   authDomain: 'timeres-86dcf.firebaseapp.com',
   databaseURL: 'https://timeres-86dcf.firebaseio.com',
   projectId: 'timeres-86dcf',

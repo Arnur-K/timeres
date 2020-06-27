@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import NavItem from '../../navigation/navItems/navItem/navItem';
 import './userPopup.scss';
 
-const userPopup = ({ photoURL, displayName, email, content, lang }) => {
+const userPopup = ({ photoURL, displayName, email }) => {
   return (
     <div className="user-popup">
       {photoURL !== null ? (
         <img src={photoURL} alt="User" className="user-popup__user-photo" />
       ) : (
-        <i className="fas fa-user-alt user-popup__user-icon" />
-      )}
+          <i className="fas fa-user-alt user-popup__user-icon" />
+        )}
       <div className="user-popup__text-box">
         <p className="user-popup__name">{displayName}</p>
         <p className="user-popup__email">{email}</p>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { connect } from 'react-redux';
 import transition025 from '../../../shared/animationTransitions';
 import NavItem from '../navItems/navItem/navItem';
 import Logo from '../logo/logo';
@@ -9,7 +8,7 @@ import NavItems from '../navItems/navItems';
 import NavAuth from '../navAuth/navAuth';
 import './navBar.scss';
 
-const NavBar = ({ isAuthenticated, clicked, lang }) => {
+const NavBar = ({ isAuthenticated, clicked }) => {
   const [isActive, setIsActive] = useState(false);
 
   const variants = {
@@ -101,7 +100,7 @@ const NavBar = ({ isAuthenticated, clicked, lang }) => {
                 linkCn="header__mobile-bottom-nav-link"
                 activeCn="active-yellow"
               >
-                {lang === 'en' ? 'Mange your account' : 'Управление аккаунтом'}
+                Mange your account
               </NavItem>
               <NavItem
                 link="/sign-out"
@@ -109,7 +108,7 @@ const NavBar = ({ isAuthenticated, clicked, lang }) => {
                 linkCn="header__mobile-bottom-nav-link"
                 activeCn="active-yellow"
               >
-                {lang === 'en' ? 'Sign out' : 'Выйти'}
+                Sign out
               </NavItem>
             </ul>
           </nav>
@@ -119,19 +118,13 @@ const NavBar = ({ isAuthenticated, clicked, lang }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  lang: state.ui.lang,
-});
-
 NavBar.defaultProps = {
   isAuthenticated: null,
-  lang: 'en',
 };
 
 NavBar.propTypes = {
   isAuthenticated: PropTypes.string,
-  lang: PropTypes.string,
   clicked: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(NavBar);
+export default NavBar;

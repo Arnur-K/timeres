@@ -129,13 +129,13 @@ class Auth extends React.Component {
                 </NavLink>
               </p>
             ) : (
-              <p className="section-auth__redirect-text">
-                Don&#39;t have an account?
-                <NavLink to="/sign-up" className="section-auth__redirect-link">
-                  Sign up
+                <p className="section-auth__redirect-text">
+                  Don&#39;t have an account?
+                  <NavLink to="/sign-up" className="section-auth__redirect-link">
+                    Sign up
                 </NavLink>
-              </p>
-            )}
+                </p>
+              )}
           </h2>
           {form}
           <ErrorMesasge
@@ -170,12 +170,13 @@ const mapDispatchToProps = (dispatch) => ({
 
 Auth.defaultProps = {
   error: null,
+  signUp: null,
 };
 
 Auth.propTypes = {
   error: PropTypes.objectOf(PropTypes.any),
   onAuth: PropTypes.func.isRequired,
-  signUp: PropTypes.bool.isRequired,
+  signUp: PropTypes.bool,
   onShowLoader: PropTypes.func.isRequired,
 };
 

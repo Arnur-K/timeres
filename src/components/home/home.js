@@ -7,7 +7,7 @@ import { ReactComponent as ManWatchSvg } from '../../images/man-watch.svg';
 import Button from '../UI/button/button';
 import './home.scss';
 
-const Home = ({ history, onToggleUserModal, lang }) => {
+const Home = ({ history, onToggleUserModal }) => {
   useEffect(() => {
     onToggleUserModal();
   }, []);

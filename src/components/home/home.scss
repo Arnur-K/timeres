@@ -2,16 +2,18 @@
 @import '../../sass/mixins';
 
 .section-home {
-  min-height: 100%;
   width: 100%;
   margin: 0 5%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   &__text-box {
+    margin-right: 15rem;
+
     @include respond(tab-port) {
       width: 100%;
+      margin-right: 0;
     }
   }
 
@@ -33,6 +35,7 @@
   }
 
   &__span-2 {
+    display: block;
     font-size: 3rem;
     color: $color-stroke;
     font-weight: 300;

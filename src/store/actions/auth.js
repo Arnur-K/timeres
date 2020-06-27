@@ -44,7 +44,7 @@ export const authenticate = (email, password, signUp) => (dispatch) => {
           dispatch(showLoader(false));
           dispatch(authSuccess(token, response.user));
 
-          response.user.sendEmailVerification().then(() => {});
+          response.user.sendEmailVerification();
         });
       })
       .catch((error) => {
